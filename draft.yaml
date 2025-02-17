@@ -1,0 +1,73 @@
+models:
+  Video:
+    name: string
+    vimeo: string
+    type: string
+    status: string
+
+  Age:
+    name: string
+    slug: string
+    image: string  
+    status: string
+    relationships:
+      hasMany: Video
+
+  Category:
+    name: string
+    slug: string
+    image: string   
+    status: string
+    memberships: integer
+    external: integer
+    url: string nullable
+    relationships:
+      hasMany: Video, SubCategory
+
+  SubCategory:
+    name: string
+    slug: string
+    image: string    
+    status: string
+    relationships:
+      belongsTo: Category
+      hasMany: Video, Age
+
+  Multimedia:
+    video_id: unsignedInteger   
+    sub_category_id: unsignedInteger nullable
+    age_id: unsignedInteger nullable
+    relationships:
+      belongsTo: Video, SubCategory, Age
+
+  Subscription:
+    title: string
+    price: decimal:8,2
+    qty: integer
+    status: string
+    relationships:
+      hasMany: Member
+
+  Boutique:
+    title: string
+    image: string
+    price: decimal:8,2
+    url: string nullable
+    status: string
+
+  Instagram:
+    title: string
+    code: string    
+    status: string
+
+  Introduction:
+    title: string
+    description: text
+
+  Member:
+    user_id: unsignedInteger
+    abbonement_id: unsignedInteger
+    status: string  
+    relationships:
+      belongsTo: User, Subscription
+      belongsToMany: Video

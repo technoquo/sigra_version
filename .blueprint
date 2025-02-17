@@ -1,0 +1,44 @@
+created:
+    - database/factories/VideoFactory.php
+    - database/factories/AgeFactory.php
+    - database/factories/CategoryFactory.php
+    - database/factories/SubCategoryFactory.php
+    - database/factories/MultimediaFactory.php
+    - database/factories/SubscriptionFactory.php
+    - database/factories/BoutiqueFactory.php
+    - database/factories/InstagramFactory.php
+    - database/factories/IntroductionFactory.php
+    - database/factories/MemberFactory.php
+    - database/migrations/2025_02_17_203947_create_videos_table.php
+    - database/migrations/2025_02_17_203948_create_ages_table.php
+    - database/migrations/2025_02_17_203949_create_categories_table.php
+    - database/migrations/2025_02_17_203950_create_sub_categories_table.php
+    - database/migrations/2025_02_17_203951_create_multimedia_table.php
+    - database/migrations/2025_02_17_203952_create_subscriptions_table.php
+    - database/migrations/2025_02_17_203953_create_boutiques_table.php
+    - database/migrations/2025_02_17_203954_create_instagrams_table.php
+    - database/migrations/2025_02_17_203955_create_introductions_table.php
+    - database/migrations/2025_02_17_203956_create_members_table.php
+    - database/migrations/2025_02_17_203957_create_member_video_table.php
+    - app/Models/Video.php
+    - app/Models/Age.php
+    - app/Models/Category.php
+    - app/Models/SubCategory.php
+    - app/Models/Multimedia.php
+    - app/Models/Subscription.php
+    - app/Models/Boutique.php
+    - app/Models/Instagram.php
+    - app/Models/Introduction.php
+    - app/Models/Member.php
+models:
+    User: { name: string, email: string, email_verified_at: 'timestamp nullable', password: string, two_factor_secret: 'text nullable', two_factor_recovery_codes: 'text nullable', two_factor_confirmed_at: 'timestamp nullable', remember_token: 'string:100 nullable', current_team_id: 'biginteger unsigned nullable', profile_photo_path: 'string:2048 nullable' }
+    Video: { name: string, vimeo: string, type: string, status: string }
+    Age: { name: string, slug: string, image: string, status: string, relationships: { hasMany: Video } }
+    Category: { name: string, slug: string, image: string, status: string, memberships: integer, external: integer, url: 'string nullable', relationships: { hasMany: 'Video, SubCategory' } }
+    SubCategory: { name: string, slug: string, image: string, status: string, relationships: { belongsTo: Category, hasMany: 'Video, Age' } }
+    Multimedia: { video_id: unsignedInteger, sub_category_id: 'unsignedInteger nullable', age_id: 'unsignedInteger nullable', relationships: { belongsTo: 'Video, SubCategory, Age' } }
+    Subscription: { title: string, price: 'decimal:8,2', qty: integer, status: string, relationships: { hasMany: Member } }
+    Boutique: { title: string, image: string, price: 'decimal:8,2', url: 'string nullable', status: string }
+    Instagram: { title: string, code: string, status: string }
+    Introduction: { title: string, description: text }
+    Member: { user_id: unsignedInteger, abbonement_id: unsignedInteger, status: string, relationships: { belongsTo: 'User, Subscription', belongsToMany: Video } }
