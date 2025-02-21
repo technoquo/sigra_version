@@ -51,7 +51,28 @@ class MultimediaResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('age.name')
+                ->label('Age'),
+                Tables\Columns\TextColumn::make('video.name')
+                ->label('Videos')
+                ->searchable(),
+                Tables\Columns\TextColumn::make('categories.name')
+                ->label('Categories')
+                ->formatStateUsing(function ($record) {
+                    if ($record->categories->isEmpty()) {
+                        return 'N/A'; // Fallback value when no categories are associated
+                    }
+                    $categories = $record->categories->pluck('name')->take(3); // Take only 3 categories
+                    $categoriesString = $categories->implode(', ');
+                    if ($record->categories->count() > 3) {
+                        $categoriesString .= '...'; // Indicate there are more categories
+                    }
+                    return $categoriesString;
+                })
+                ->default('N/A'),
+                Tables\Columns\TextColumn::make('subCategory.name')
+                ->label('Subcategories')
+                ->default('N/A'),
             ])
             ->filters([
                 //
