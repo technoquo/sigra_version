@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->unsignedInteger('abbonement_id');
+            $table->foreignId('users_id');
+            $table->unsignedInteger('abonements_id');
             $table->string('status');
-            $table->foreignId('subscription_id');
+            $table->foreignId('subscriptions_id');
             $table->timestamps();
         });
     }
