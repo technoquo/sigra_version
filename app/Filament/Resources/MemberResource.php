@@ -41,10 +41,10 @@ class MemberResource extends Resource
                         ->relationship('users', 'email')
                         ->searchable()
                         ->required(),
-                    // Select::make('abonnements_id')
-                    //     ->label('Plan')
-                    //     ->relationship('abonnements', 'title')
-                    //     ->required(),
+                    Select::make('subscriptions_id')
+                        ->label('Plan')
+                        ->relationship('subscriptions', 'title')
+                        ->required(),
                     Toggle::make('status')
                         ->label('Visibilité')
                         ->helperText('Activer ou désactiver Adhésion')
@@ -66,7 +66,16 @@ class MemberResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('id'),
+                Tables\Columns\TextColumn::make('users.name')
+                    ->label('Nom')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('users.email')
+                    ->label('Email')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('subscriptions.title')
+                    ->label('Plan')
+                    ->searchable(),
             ])
             ->filters([
                 //

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 class Member extends Model
 {
@@ -16,12 +16,7 @@ class Member extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'user_id',
-        'abbonement_id',
-        'status',
-        'subscription_id',
-    ];
+    protected $fillable = ['users_id', 'videos_id', 'subscriptions_id', 'status'];
 
     /**
      * The attributes that should be cast to native types.
@@ -31,22 +26,24 @@ class Member extends Model
     protected $casts = [
         'id' => 'integer',
         'user_id' => 'integer',
-        'abbonement_id' => 'integer',
-        'subscription_id' => 'integer',
+        'videos_id' => 'array',
+        'subscriptions_id' => 'integer',
     ];
 
-    public function user(): BelongsTo
+    public function users(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function subscription(): BelongsTo
+    
+
+    public function subscriptions(): BelongsTo
     {
         return $this->belongsTo(Subscription::class);
     }
 
-    public function videos(): BelongsToMany
+    public function videos(): BelongsTo
     {
-        return $this->belongsToMany(Video::class);
+        return $this->BelongsTo(Video::class);
     }
 }

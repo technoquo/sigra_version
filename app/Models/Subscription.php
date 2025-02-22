@@ -18,7 +18,7 @@ class Subscription extends Model
     protected $fillable = [
         'title',
         'price',
-        'qty',
+        
         'status',
     ];
 
@@ -29,6 +29,7 @@ class Subscription extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'title' => 'string',
         'price' => 'decimal:2',
     ];
 

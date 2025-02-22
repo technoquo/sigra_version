@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->foreignId('users_id');
-            $table->unsignedInteger('abonements_id');
-            $table->string('status');
-            $table->foreignId('subscriptions_id');
+            $table->longText('videos_id');
+            $table->foreignId('abonnements_id')->constrained('abonnements');
+            $table->boolean('status');     
             $table->timestamps();
         });
     }
