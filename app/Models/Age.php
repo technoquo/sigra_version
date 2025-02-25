@@ -2,37 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Age extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name',
-        'slug',
-        'image',
-        'status',
-    ];
+     protected $fillable = ['name'];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'integer',
-    ];
 
-    public function videos(): HasMany
-    {
-        return $this->hasMany(Video::class);
-    }
+
+
+public function getThumbnailUrl()
+{
+    $isUrl = str_contains($this->image, 'http');
+
+    return ($isUrl) ? $this->image : Storage::disk()->url($this->image);
+}
 }

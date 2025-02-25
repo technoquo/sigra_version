@@ -18,17 +18,28 @@
         @livewireStyles
     </head>
     <body class="font-sans antialiased">
-         <header>
-             {{-- @include('layouts.partials.navbar') --}}
-         </header>
-     
+        <x-banner />
+
+        <div class="min-h-screen bg-gray-100">
+            @livewire('navigation-menu')
+
+            <!-- Page Heading -->
+            @if (isset($header))
+                <header class="bg-white shadow">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endif
+
             <!-- Page Content -->
             <main>
                 {{ $slot }}
             </main>
-        <footer>
-            {{-- @include('layouts.partials.footer') --}}
-        </footer>
+        </div>
+
+        @stack('modals')
+
         @livewireScripts
     </body>
 </html>
