@@ -18,7 +18,9 @@ class Ages extends Component
     public function mount() {
         $this->ages = Age::where('status', 1)->get();
         
-      //  $this->pocorns = Category::where('id', 11)->get();
+        $this->pocorns = Category::where('id', 11)->get();
+
+        $this->categories = Category::where('status', 1)->get();
         
         
 

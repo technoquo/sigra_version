@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
@@ -47,6 +48,13 @@ class Category extends Model
     public function multimedias()
 {
     return $this->belongsToMany(Multimedia::class, 'category_multimedia');
+}
+
+public function getThumbnailUrl()
+{
+    $isUrl = str_contains($this->image, 'http');
+
+    return ($isUrl) ? $this->image : Storage::disk()->url($this->image);
 }
 
 }

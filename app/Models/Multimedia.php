@@ -38,9 +38,9 @@ class Multimedia extends Model
         return $this->belongsTo(Video::class);
     }
 
-    public function subCategory(): BelongsTo
+    public function subcategory(): BelongsTo
     {
-        return $this->belongsTo(SubCategory::class);
+        return $this->belongsTo(SubCategory::class, 'sub_category_id');
     }
 
     public function age(): BelongsTo
@@ -52,5 +52,6 @@ class Multimedia extends Model
    {  
     return $this->belongsToMany(Category::class, 'category_multimedia');
    }
+   
 
 }
