@@ -15,7 +15,7 @@
 
     <div class="px-5 py-8 text-center">
         <!-- Added text-center -->
-        <a href="">
+        <a href="{{ route('sigpop')}}">
             <img class="md:w-[250px] aspect-auto mx-auto" src="{{ $pocorn->getThumbnailUrl() }}"> <!-- Added mx-auto -->
         </a>
     </div>
@@ -26,7 +26,7 @@
     @if($category->memberships === 1) {{-- Added this line user memberships --}}
     <div class="px-5 py-8 text-center">
         <!-- Added text-center -->
-        <a href="">
+        <a href="{{ route('monsigra')}}">
             <img class="md:w-[250px] aspect-auto mx-auto" src="{{ $category->getThumbnailUrl() }}">
             <!-- Added mx-auto -->
         </a>

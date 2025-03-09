@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Age;
+use App\Models\Video;
 use App\Models\Category;
 use App\Models\Multimedia;
 use App\Models\CategoryAge;
@@ -22,7 +23,8 @@ class SubCategoryController extends Controller
                 'sub_categories.name',
                 'ages.id as age_id',
                 'ages.name as age_name',
-                'sub_categories.image'
+                'sub_categories.image',
+                'sub_categories.slug'
             ])
             ->join('categories', 'categories.id', '=', 'sub_categories.category_id')
             ->join('multimedia', 'multimedia.sub_category_id', '=', 'sub_categories.id')
@@ -34,6 +36,27 @@ class SubCategoryController extends Controller
 
        
 
-        return view('pages.subcategories', compact('subcategories'));
+        return view('pages.subcategories', compact('subcategories','age'));
+    }
+
+    public function show($age, $category, $subcategory)
+    {
+
+
+      $subcategory_id = SubCategory::where('slug', $subcategory)->firstOrFail();
+      $age_id = Age::where('name', $age)->firstOrFail();
+
+      $multimedias = Multimedia::where('sub_category_id', $subcategory_id->id)
+                   ->where('age_id', $age_id->id)
+                   ->get();
+       return view('pages.videos', compact('multimedias', 'age', 'category', 'subcategory'));
+    }
+
+    public function vimeo($age, $category, $subcategory, $vimeo) {
+       
+        $video = Video::where('slug', $vimeo)->firstOrFail();
+        
+
+        return view('pages.video', compact('video'));
     }
 }
