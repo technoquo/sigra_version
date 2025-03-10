@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AgeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SigPopController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\BoutiqueController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MonSigraController;
 use App\Http\Controllers\SubCategoryController;
@@ -20,6 +22,8 @@ Route::get('/sigpop', [SigPopController::class, 'index'])->name('sigpop');
 Route::get('/sigpop/{slug}', [SigPopController::class, 'vimeo'])->name('sigpop.show');
 Route::get('/monsigra', [MonSigraController::class, 'index'])->name('monsigra');
 Route::get('/monsigra/{slug}', [MonSigraController::class, 'vimeo'])->name('monsigra.show');
+Route::get('laboutique', [BoutiqueController::class, 'index'])->name('boutique.index');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 // Route::get('/', function () {
 //     return view('welcome');
 // });

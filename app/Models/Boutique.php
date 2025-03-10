@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Boutique extends Model
 {
@@ -31,4 +32,12 @@ class Boutique extends Model
         'id' => 'integer',
         'price' => 'decimal:2',
     ];
+
+    
+public function getThumbnailUrl()
+{
+    $isUrl = str_contains($this->image, 'http');
+
+    return ($isUrl) ? $this->image : Storage::disk()->url($this->image);
+}
 }

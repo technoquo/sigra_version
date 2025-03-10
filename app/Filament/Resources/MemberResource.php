@@ -28,7 +28,11 @@ class MemberResource extends Resource
 {
     protected static ?string $model = Member::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+   // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+   protected static ?string $navigationGroup = 'Deuxième groupe';
+
+   protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {
@@ -76,6 +80,11 @@ class MemberResource extends Resource
                 Tables\Columns\TextColumn::make('subscriptions.title')
                     ->label('Plan')
                     ->searchable(),
+                Tables\Columns\IconColumn::make('status')
+                    ->toggleable()
+                    ->sortable()
+                    ->boolean()
+                    ->label('Statut'), 
             ])
             ->filters([
                 //

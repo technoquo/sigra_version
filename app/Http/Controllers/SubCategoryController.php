@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Age;
 use App\Models\Video;
+use App\Models\Member;
 use App\Models\Category;
 use App\Models\Multimedia;
 use App\Models\CategoryAge;
@@ -55,8 +56,13 @@ class SubCategoryController extends Controller
     public function vimeo($age, $category, $subcategory, $vimeo) {
        
         $video = Video::where('slug', $vimeo)->firstOrFail();
+
+        $members = Member::where('subscriptions_id', '=', 1)
+        ->where('status', '=', 1)
+        ->where('users_id', '=', auth()->user()->id)
+        ->get();
         
 
-        return view('pages.video', compact('video'));
+        return view('pages.video', compact('video', 'members'));
     }
 }

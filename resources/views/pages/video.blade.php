@@ -1,7 +1,10 @@
 <x-app-layout>
     <section class="bg-white dark:bg-gray-900">
-        <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">         
-            @if ($video->type === 'publique' || (Auth::check() && $video->type === 'privé'))
+        <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">  
+            @if (!empty($members))
+            <div class="text-2xl font-extrabold tracking-tight leading-none dark:text-white h-screen items-center mt-10">
+                Seuls les membres de SIGRA FAN peuvent visionner cette vidéo.</div>
+            @elseif ($video->type === 'publique' || (Auth::check() && $video->type === 'privé'))
            
                 <iframe class="w-full aspect-video " src="https://player.vimeo.com/video/{{ $video->vimeo }}"
                     allow="autoplay; fullscreen; picture-in-picture" title="{{ $video->name }}"></iframe>
@@ -22,9 +25,7 @@
     
                     </a>
                 </div>
-            @else
-                <div class="text-2xl font-extrabold tracking-tight leading-none">
-                    Seuls les membres de SIGRA FAN peuvent visionner cette vidéo.</div>
+                        
             @endif
         </div>
     

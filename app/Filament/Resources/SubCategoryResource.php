@@ -36,7 +36,11 @@ class SubCategoryResource extends Resource
 {
     protected static ?string $model = SubCategory::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $navigationGroup = 'Deuxième groupe';
+
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
@@ -91,17 +95,19 @@ class SubCategoryResource extends Resource
         ->columns([
             ImageColumn::make('image'),
             TextColumn::make('name')
+                ->label('Nom')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('slug'),               
             TextColumn::make('category.name')
+                ->label('Catégorie')
                 ->searchable()
                 ->sortable(),
             IconColumn::make('status')
                 ->toggleable()
                 ->sortable()
                 ->boolean()
-                ->label('Visibility'),
+                ->label('Visibilité'),
         ])
 
         ->defaultSort('name')

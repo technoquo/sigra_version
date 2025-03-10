@@ -23,7 +23,10 @@ class VideoResource extends Resource
 {
     protected static ?string $model = Video::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $navigationGroup = 'Deuxième groupe';
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -57,7 +60,7 @@ class VideoResource extends Resource
             ->toggleable()
             ->sortable()
             ->boolean()
-            ->label('Visibility'), 
+            ->label('Visibilité'), 
          TextColumn::make('type')
             ->searchable()
             ->sortable(), 

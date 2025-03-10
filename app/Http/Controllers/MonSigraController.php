@@ -12,10 +12,11 @@ class MonSigraController extends Controller
     
   public function index()
     {
+   
       
             $members = Member::where('subscriptions_id', '=', 1)
             ->where('status', '=', 1)
-            ->where('users_id', '=', 5)
+            ->where('users_id', '=', auth()->user()->id)
             ->get();
 
             // Recolectar todos los videos_id de los miembros

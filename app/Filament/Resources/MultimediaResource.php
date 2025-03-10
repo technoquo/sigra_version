@@ -19,7 +19,11 @@ class MultimediaResource extends Resource
 {
     protected static ?string $model = Multimedia::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+      // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+      protected static ?string $navigationGroup = 'Deuxième groupe';
+
+      protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
@@ -28,19 +32,19 @@ class MultimediaResource extends Resource
             Section::make('Datos Multimedia')
                 ->schema([
                     Select::make('video_id')
-                        ->label('Video')
+                        ->label('Vidéo')
                         ->relationship('video', 'name')
                         ->required(),
                     Select::make('categories')                      
-                        ->label('Categorías')
+                        ->label('Catégories')
                         ->relationship('categories', 'name')
                         ->multiple(),
                     Select::make('sub_category_id')
-                        ->label('Subcategoría')
+                        ->label('Sous-catégories')
                         ->relationship('subCategory', 'name')
                         ->nullable(),
                     Select::make('age_id')
-                        ->label('Edad')
+                        ->label('Age')
                         ->relationship('age', 'name')
                         ->nullable(),
                 ])
@@ -54,10 +58,10 @@ class MultimediaResource extends Resource
                 Tables\Columns\TextColumn::make('age.name')
                 ->label('Age'),
                 Tables\Columns\TextColumn::make('video.name')
-                ->label('Videos')
+                ->label('Vidéos')
                 ->searchable(),
                 Tables\Columns\TextColumn::make('categories.name')
-                ->label('Categories')
+                ->label('Catégories')
                 ->formatStateUsing(function ($record) {
                     if ($record->categories->isEmpty()) {
                         return 'N/A'; // Fallback value when no categories are associated
@@ -71,7 +75,7 @@ class MultimediaResource extends Resource
                 })
                 ->default('N/A'),
                 Tables\Columns\TextColumn::make('subCategory.name')
-                ->label('Subcategories')
+                ->label('Sous-catégories')
                 ->default('N/A'),
             ])
             ->filters([

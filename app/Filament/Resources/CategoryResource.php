@@ -33,8 +33,11 @@ use App\Filament\Resources\CategoryResource\Pages\ListCategories;
 class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
+   // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+   protected static ?string $navigationGroup = 'Deuxième groupe';
+
+   protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -82,7 +85,7 @@ class CategoryResource extends Resource
         return $table
         ->columns([
             ImageColumn::make('image'),
-            TextColumn::make('name')
+            TextColumn::make('nome')
                 ->searchable()
                 ->sortable(),
             IconColumn::make('memberships')
@@ -94,7 +97,7 @@ class CategoryResource extends Resource
                 ->toggleable()
                 ->sortable()
                 ->boolean()
-                ->label('Visibility'),
+                ->label('Visibilité'),
         ])
 
         ->defaultSort('name')
