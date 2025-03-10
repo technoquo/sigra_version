@@ -57,12 +57,31 @@ class SubCategoryController extends Controller
        
         $video = Video::where('slug', $vimeo)->firstOrFail();
 
-        $members = Member::where('subscriptions_id', '=', 1)
-        ->where('status', '=', 1)
-        ->where('users_id', '=', auth()->user()->id)
-        ->get();
-        
+        if (auth()->check()) {
+            $members = Member::where('subscriptions_id', 1)
+                ->where('status', 1)
+                ->where('users_id', auth()->user()->id)
+                ->get(); // Devuelve un solo objeto en lugar de una colección
+        } else {
+            $members = collect(); // Colección vacía para evitar errores
+        }
+        $allVimeos = collect();
+        foreach ($members as $member) {
+            $allVimeos = $allVimeos->merge(Video::whereIn('id', $member->videos_id)->pluck('vimeo'));
+        }
 
-        return view('pages.video', compact('video', 'members'));
+        $videoId = Video::where('slug', $vimeo)->firstOrFail();
+       
+
+        $memberVimeoValue = (string) $allVimeos->first();
+       
+       
+        if ($videoId->vimeo === $memberVimeoValue) {
+            $member = true;
+        } else{
+            $member = false;
+        }
+       
+        return view('pages.video', compact('video', 'member'));
     }
 }

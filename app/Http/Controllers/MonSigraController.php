@@ -19,29 +19,32 @@ class MonSigraController extends Controller
             ->where('users_id', '=', auth()->user()->id)
             ->get();
 
+           
+
             // Recolectar todos los videos_id de los miembros
             $videosIds = $members->pluck('videos_id')->flatMap(function ($videos) {
             return is_string($videos) ? json_decode($videos, true) : $videos;
             })->unique()->values()->all();
 
- 
+            $videos = Video::whereIn('id', $videosIds)->get();
+           
 
             // Obtener los multimedias filtrados y ordenados
-            $multimedias = Multimedia::query()
-            ->with('video')
-            ->whereHas('video', function ($query) {
-            $query->where('type', 'privé')
-            ->where('status', 1);
-            })
-            ->whereIn('multimedia.id', $videosIds) // Especificar la tabla multimedia.id
-            ->join('videos', 'multimedia.video_id', '=', 'videos.id')
-            ->orderBy('videos.name')
-            ->select('multimedia.*')
-            ->get();
+            // $multimedias = Multimedia::query()
+            // ->with('video')
+            // ->whereHas('video', function ($query) {
+            // $query->where('type', 'privé')
+            // ->where('status', 1);
+            // })
+            // ->whereIn('multimedia.id', $videosIds) // Especificar la tabla multimedia.id
+            // ->join('videos', 'multimedia.video_id', '=', 'videos.id')
+            // ->orderBy('videos.name')
+            // ->select('multimedia.*')
+            // ->get();
 
           
 
-            return view('pages.monsigra', compact('multimedias'));
+            return view('pages.monsigra', compact('videos'));
 
         
     }
