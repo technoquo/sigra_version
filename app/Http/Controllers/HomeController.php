@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mission;
 use App\Models\Instagram;
 use Illuminate\Http\Request;
 
@@ -15,4 +16,16 @@ class HomeController extends Controller
         return view('home', compact('instagrams'));
                
     }
+
+    public function info($slug)
+    {
+
+        $mission = Mission::where('slug', $slug)->firstOrFail();
+
+
+        return view('info', [
+            'mission' => $mission
+        ]);
+    }
+
 }

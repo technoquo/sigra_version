@@ -10,6 +10,7 @@ use App\Models\Multimedia;
 use App\Models\CategoryAge;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use App\Models\Membership;
 
 class SubCategoryController extends Controller
 {
@@ -57,30 +58,39 @@ class SubCategoryController extends Controller
        
         $video = Video::where('slug', $vimeo)->firstOrFail();
 
-        if (auth()->check()) {
-            $members = Member::where('subscriptions_id', 1)
-                ->where('status', 1)
-                ->where('users_id', auth()->user()->id)
-                ->get(); // Devuelve un solo objeto en lugar de una colección
-        } else {
-            $members = collect(); // Colección vacía para evitar errores
-        }
-        $allVimeos = collect();
-        foreach ($members as $member) {
-            $allVimeos = $allVimeos->merge(Video::whereIn('id', $member->videos_id)->pluck('vimeo'));
-        }
-
+        // if (auth()->check()) {
+        //     $members = Member::where('subscriptions_id', 1)
+        //         ->where('status', 1)
+        //         ->where('users_id', auth()->user()->id)
+        //         ->get(); // Devuelve un solo objeto en lugar de una colección
+        // } else {
+        //     $members = collect(); // Colección vacía para evitar errores
+        // }
+        // $allVimeos = collect();
+        // foreach ($members as $member) {
+        //     $allVimeos = $allVimeos->merge(Video::whereIn('id', $member->videos_id)->pluck('vimeo'));
+        // }
+        
         $videoId = Video::where('slug', $vimeo)->firstOrFail();
        
+        $id = (string) $videoId->id;
+       
 
-        $memberVimeoValue = (string) $allVimeos->first();
+        $members = Member::where('subscriptions_id', 1)
+        ->where('status', 1)
+        ->where('users_id', auth()->user()->id)
+        ->whereJsonContains('videos_id', $id)
+        ->get();
+
+      //  $memberVimeoValue = (string) $allVimeos->first();
        
-       
-        if ($videoId->vimeo === $memberVimeoValue) {
-            $member = true;
-        } else{
-            $member = false;
-        }
+       if ($members->count() > 0) {
+           $member = true;
+       } else {
+           $member = null;
+       }
+
+      
        
         return view('pages.video', compact('video', 'member'));
     }

@@ -5,3 +5,9 @@
 [x-cloak] {
     display: none;
 }
+
+
+.info p, .info ul > li {
+    padding: 10px;
+    list-style-type: none;
+}

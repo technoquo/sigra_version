@@ -31,7 +31,7 @@ class InstagramResource extends Resource
 
     protected static ?string $navigationGroup = 'Premier groupe';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
