@@ -11,6 +11,7 @@
     @endforeach
 
 
+
     @foreach ($this->pocorns as $pocorn)
 
     <div class="px-5 py-8 text-center">
@@ -21,16 +22,17 @@
     </div>
 
     @endforeach
-
-    @foreach ($this->categories as $category)
-    @if($category->memberships === 1) {{-- Added this line user memberships --}}
-    <div class="px-5 py-8 text-center">
-        <!-- Added text-center -->
-        <a href="{{ route('monsigra')}}">
-            <img class="md:w-[250px] aspect-auto mx-auto" src="{{ $category->getThumbnailUrl() }}">
-            <!-- Added mx-auto -->
-        </a>
-    </div>
-    @endif
-    @endforeach
+    @auth
+        @foreach ($this->categories as $category)
+        @if($category->memberships === 1) {{-- Added this line user memberships --}}
+        <div class="px-5 py-8 text-center">
+            <!-- Added text-center -->
+            <a href="{{ route('monsigra')}}">
+                <img class="md:w-[250px] aspect-auto mx-auto" src="{{ $category->getThumbnailUrl() }}">
+                <!-- Added mx-auto -->
+            </a>
+        </div>
+        @endif
+        @endforeach
+    @endauth
 </section>

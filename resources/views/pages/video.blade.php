@@ -1,7 +1,7 @@
 <x-app-layout>
     <section class="bg-white">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
-            
+
             @if ($member == true && $video->type === 'privé')
             <iframe class="w-full aspect-video " src="https://player.vimeo.com/video/{{ $video->vimeo }}"
                 allow="autoplay; fullscreen; picture-in-picture" title="{{ $video->name }}"></iframe>
@@ -11,15 +11,15 @@
 
             @else
             <div
-                class="text-2xl font-extrabold tracking-tight leading-none h-screen items-center mt-10">
+                class="text-2xl font-extrabold tracking-tight leading-none items-center mt-10">
                 Seuls les membres de SIGRA FAN peuvent visionner cette vidéo.</div>
 
 
             @endif
         </div>
         <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4 mt-10 mb-10">
-            <a @click.prevent="window.history.back()"
-                class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-400    
+            <a x-data @click.prevent="history.back()"
+                class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-400
                  hover:bg-slate-800 focus:ring-4 focus:ring-blue-300 cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
@@ -29,5 +29,12 @@
             </a>
         </div>
     </section>
+    @push('script')
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+    @endpush
 
 </x-app-layout>

@@ -25,6 +25,7 @@ Route::get('/monsigra/{slug}', [MonSigraController::class, 'vimeo'])->name('mons
 Route::get('laboutique', [BoutiqueController::class, 'index'])->name('boutique.index');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::get('/{slug}', [HomeController::class, 'info'])->name('info');
+Route::get('/resultat/{slug}', \App\Livewire\Results::class)->name('resultat.index');
 // Route::get('/', function () {
 //     return view('welcome');
 // });

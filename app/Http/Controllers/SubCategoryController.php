@@ -36,7 +36,7 @@ class SubCategoryController extends Controller
             ->distinct()
             ->get();
 
-       
+
 
         return view('pages.subcategories', compact('subcategories','age'));
     }
@@ -55,7 +55,7 @@ class SubCategoryController extends Controller
     }
 
     public function vimeo($age, $category, $subcategory, $vimeo) {
-       
+
         $video = Video::where('slug', $vimeo)->firstOrFail();
 
         // if (auth()->check()) {
@@ -70,28 +70,30 @@ class SubCategoryController extends Controller
         // foreach ($members as $member) {
         //     $allVimeos = $allVimeos->merge(Video::whereIn('id', $member->videos_id)->pluck('vimeo'));
         // }
-        
+
         $videoId = Video::where('slug', $vimeo)->firstOrFail();
-       
+
         $id = (string) $videoId->id;
-       
 
-        $members = Member::where('subscriptions_id', 1)
-        ->where('status', 1)
-        ->where('users_id', auth()->user()->id)
-        ->whereJsonContains('videos_id', $id)
-        ->get();
 
-      //  $memberVimeoValue = (string) $allVimeos->first();
-       
-       if ($members->count() > 0) {
-           $member = true;
-       } else {
-           $member = null;
-       }
+        if (auth()->check()) {
+            $members = Member::where('subscriptions_id', 1)
+                ->where('status', 1)
+                ->where('users_id', auth()->user()->id)
+                ->whereJsonContains('videos_id', $id)
+                ->get();
 
-      
-       
+            if ($members->count() > 0) {
+                $member = true;
+            } else {
+                $member = false;
+            }
+        } else {
+            $member = false;
+        }
+
+
+
         return view('pages.video', compact('video', 'member'));
     }
 }
