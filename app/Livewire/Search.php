@@ -14,17 +14,15 @@ class Search extends Component
 
     public function updatedSearch()
     {
+
+       if (!Auth::check()){
+            $this->DisplaySearch();         
+            
+       } else {
         $member = Member::where('users_id', Auth::id())->first();
         if (is_array($member->videos_id) && count($member->videos_id) === 0) {
-
-            if (!empty($this->search)) {
-                $this->results = Video::where('name', 'like', '%' . $this->search . '%')
-                    ->where('type','publique')
-                    ->limit(5)
-                    ->get();
-            } else {
-                $this->results = [];
-            }
+             $this->DisplaySearch();
+          
         } else {
             if (!empty($this->search)) {
                 $this->results = Video::where('name', 'like', '%' . $this->search . '%')
@@ -35,7 +33,20 @@ class Search extends Component
                 $this->results = [];
             }
         }
+       }      
 
+    }
+
+    public function DisplaySearch()
+    {
+        if (!empty($this->search)) {
+            $this->results = Video::where('name', 'like', '%' . $this->search . '%')
+                ->where('type','publique')
+                ->limit(5)
+                ->get();
+        } else {
+            $this->results = [];
+        } 
     }
 
     public function render()
