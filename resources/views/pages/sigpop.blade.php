@@ -10,7 +10,7 @@
             <div class="p-5">
                 <input type="hidden" wire:model="video_id" value="{{ $multimedia->video->id }}">
                 <h5 class="mb-2 text-base font-bold tracking-tight text-gray-900 dark:text-white text-center p-2">
-                    {{ $multimedia->video->name }}</h5>
+                    {{ mb_strlen($multimedia->video->name) > 30 ? mb_substr($multimedia->video->name, 0, 30) . '...' : $multimedia->video->name }}</h5>
             </div>
         </div>
         @endforeach

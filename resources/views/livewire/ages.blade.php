@@ -5,7 +5,7 @@
     <div class="px-5 py-8 text-center">
         <!-- Added text-center -->
         <a href="{{ route('categories.index', ['slug' => $age->name]) }}">
-            <img class="aspect-auto mx-auto" src="{{ $age->getThumbnailUrl() }}"> <!-- Added mx-auto -->
+            <img class="aspect-auto mx-auto" src="{{ asset('storage/' . $age->image) }}"> <!-- Added mx-auto -->
         </a>
     </div>
     @endforeach
@@ -17,7 +17,7 @@
     <div class="px-5 py-8 text-center">
         <!-- Added text-center -->
         <a href="{{ route('sigpop')}}">
-            <img class="md:w-[250px] aspect-auto mx-auto" src="{{ $pocorn->getThumbnailUrl() }}"> <!-- Added mx-auto -->
+            <img class="md:w-[250px] aspect-auto mx-auto" src="{{ asset('storage/' . $pocorn->image) }}"> <!-- Added mx-auto -->
         </a>
     </div>
 
@@ -28,7 +28,7 @@
         <div class="px-5 py-8 text-center">
             <!-- Added text-center -->
             <a href="{{ route('monsigra')}}">
-                <img class="md:w-[250px] aspect-auto mx-auto" src="{{ $category->getThumbnailUrl() }}">
+                <img class="md:w-[250px] aspect-auto mx-auto" src="{{ asset('storage/' . $category->image) }}"> <!-- Added mx-auto -->
                 <!-- Added mx-auto -->
             </a>
         </div>
