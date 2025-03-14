@@ -1,5 +1,5 @@
 <x-app-layout>
-    <section class="bg-white dark:bg-gray-900">
+    <section class="bg-white">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
             <iframe class="w-full aspect-video " src="https://player.vimeo.com/video/{{ $video->vimeo }}"
                 allow="autoplay; fullscreen; picture-in-picture" title="{{ $video->name }}"></iframe>

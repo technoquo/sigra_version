@@ -8,7 +8,12 @@
             <h1
                 class="mt-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl">
                 {{ $video->name }}</h1>
-
+            @elseif ($member == false && $video->type === 'publique')
+            <iframe class="w-full aspect-video " src="https://player.vimeo.com/video/{{ $video->vimeo }}"
+                allow="autoplay; fullscreen; picture-in-picture" title="{{ $video->name }}"></iframe>
+            <h1
+                class="mt-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl">
+                {{ $video->name }}</h1>
             @else
             <div
                 class="text-2xl font-extrabold tracking-tight leading-none items-center mt-10">
