@@ -7,7 +7,7 @@
             <div
                 class="max-w-sm bg-white border border-gray-200 rounded-lg shadow px-5 py-8 m-6">
 
-                <img class="rounded-t-lg" src="{{ $boutique->getThumbnailUrl() }}" alt="{{ $boutique->title }}" />
+                <img class="rounded-t-lg" src="{{ $boutique->image }}" alt="{{ $boutique->title }}" />
 
                 <div class="p-5">
                     <a href="#">
