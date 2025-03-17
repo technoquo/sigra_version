@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('vimeo');
-            $table->string('type')->default('public');
+            $table->string('type')->default('publique');
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

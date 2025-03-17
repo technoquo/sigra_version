@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('image');
-            $table->integer('memberships')->default(0);
-            $table->integer('external')->default(0);
+            $table->string('type')->default('publique');
             $table->string('url')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
