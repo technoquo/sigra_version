@@ -5,6 +5,8 @@ namespace App\Filament\Resources;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Category;
+use App\Enums\CategoryTypeEnum;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Actions\EditAction;
@@ -56,8 +58,7 @@ class CategoryResource extends Resource
                         }),
                     
                       TextInput::make('slug')
-                        ->required()
-                        ->unique() // Optional: ensures the slug is unique in the database
+                        ->required()                       
                         ->disabled() // Optional: prevents manual editing of the slug
                         ->dehydrated(true), // Ensures the slug is included in the form submission
                         Toggle::make('status')
@@ -69,12 +70,20 @@ class CategoryResource extends Resource
             Group::make()
                 ->schema([
                     Section::make([
-                        Checkbox::make('memberships')
-                            ->label('exclusivement membre')
-                            ->default(false),
-                            TextInput::make('external')
+                        Select::make('type')
+                            ->options([
+                                'publique' => CategoryTypeEnum::PUBLIQUE->value,
+                                'tous' => CategoryTypeEnum::TOUS->value,
+                                'affiliations' => CategoryTypeEnum::AFFILIATIONS->value,
+                                'external' => CategoryTypeEnum::EXTERNAL->value,
+                            ])
+                            ->required()
+                            ->reactive(),
+                        TextInput::make('external')
                             ->label('External URL')
-                    ])
+                            ->visible(fn (callable $get) => $get('type') === 'external'),
+                       ])
+                    
                 ]),
             Group::make()
                 ->schema([
@@ -99,11 +108,10 @@ class CategoryResource extends Resource
                 ->label('Nom')
                 ->searchable()
                 ->sortable(),
-            IconColumn::make('memberships')
-                ->toggleable()
-                ->sortable()
-                ->boolean()
-                ->label('Exclusivement'),
+            TextColumn::make('type')               
+                ->sortable()   
+                ->searchable()           
+                ->label('Type'),
             IconColumn::make('status')
                 ->toggleable()
                 ->sortable()

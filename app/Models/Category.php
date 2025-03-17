@@ -20,9 +20,8 @@ class Category extends Model
         'name',
         'slug',
         'image',
-        'status',
-        'memberships',
-        'external',
+        'type',
+        'status',        
         'url',
     ];
 
