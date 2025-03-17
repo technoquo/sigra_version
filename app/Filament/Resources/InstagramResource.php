@@ -29,7 +29,9 @@ class InstagramResource extends Resource
 {
     protected static ?string $model = Instagram::class;
 
-    protected static ?string $navigationGroup = 'Premier groupe';
+    protected static ?string $navigationGroup = 'Accueil';
+    protected static ?string $navigationLabel = 'Instagram';
+    protected static ?string $label = 'Instagram';
 
     protected static ?int $navigationSort = 2;
 

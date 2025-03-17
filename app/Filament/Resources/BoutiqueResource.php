@@ -20,7 +20,7 @@ class BoutiqueResource extends Resource
 {
     protected static ?string $model = Boutique::class;
 
-    protected static ?string $navigationGroup = 'Premier groupe';
+    protected static ?string $navigationGroup = 'Accueil';
 
     protected static ?int $navigationSort = 3;
 

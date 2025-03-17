@@ -38,7 +38,9 @@ class SubCategoryResource extends Resource
 
     // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Deuxième groupe';
+    protected static ?string $navigationGroup = 'Vidéothèque';
+    protected static ?string $navigationLabel = 'Sous-catégories';
+    protected static ?string $label = 'Sous-catégories';
 
     protected static ?int $navigationSort = 3;
 
@@ -50,9 +52,17 @@ class SubCategoryResource extends Resource
                         ->schema([
                             Section::make([
                                 TextInput::make('name')
-                                    ->label('nom')
-                                    ->required(),
-                                TextInput::make('slug'),
+                                ->required()
+                                ->live(onBlur: true) // Updates the slug as you type or on blur
+                                ->afterStateUpdated(function (callable $set, $state) {
+                                    $set('slug', \Illuminate\Support\Str::slug($state));
+                                }),
+                            
+                             TextInput::make('slug')
+                                ->required()
+                                ->unique() // Optional: ensures the slug is unique in the database
+                                ->disabled() // Optional: prevents manual editing of the slug
+                                ->dehydrated(true), // Ensures the slug is included in the form submission
                                 Select::make('categories')                      
                                 ->label('Categorías')
                                 ->searchable()

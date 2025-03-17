@@ -30,7 +30,9 @@ class MemberResource extends Resource
 
    // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-   protected static ?string $navigationGroup = 'Deuxième groupe';
+   protected static ?string $navigationGroup = 'Vidéothèque';
+   protected static ?string $navigationLabel = 'Membres';
+   protected static ?string $label = 'Membres';
 
    protected static ?int $navigationSort = 5;
 

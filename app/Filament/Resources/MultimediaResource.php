@@ -21,7 +21,9 @@ class MultimediaResource extends Resource
 
       // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-      protected static ?string $navigationGroup = 'Deuxième groupe';
+      protected static ?string $navigationGroup = 'Vidéothèque';
+      protected static ?string $navigationLabel = 'Multimédia';
+      protected static ?string $label = 'Multimédia';
 
       protected static ?int $navigationSort = 4;
 

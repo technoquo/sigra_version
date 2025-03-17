@@ -25,7 +25,9 @@ class VideoResource extends Resource
 
     // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Deuxième groupe';
+    protected static ?string $navigationGroup = 'Vidéothèque';
+    protected static ?string $navigationLabel = 'Vidéos';
+    protected static ?string $label = 'Vidéos';
     protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
@@ -33,7 +35,17 @@ class VideoResource extends Resource
         return $form
         ->schema([
             TextInput::make('name')->label('nom de la vidéo')
-            ->required(),
+            ->required()
+            ->live(onBlur: true) // Updates the slug as you type or on blur
+            ->afterStateUpdated(function (callable $set, $state) {
+                $set('slug', \Illuminate\Support\Str::slug($state));
+            }),
+        
+        TextInput::make('slug')
+            ->required()
+            ->unique() // Optional: ensures the slug is unique in the database
+            ->disabled() // Optional: prevents manual editing of the slug
+            ->dehydrated(true), // Ensures the slug is included in the form submission
             TextInput::make('vimeo')->label('Id Vimeo')
             ->required(),
             Toggle::make('status')

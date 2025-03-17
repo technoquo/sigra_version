@@ -35,7 +35,9 @@ class CategoryResource extends Resource
     protected static ?string $model = Category::class;
    // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-   protected static ?string $navigationGroup = 'Deuxième groupe';
+   protected static ?string $navigationGroup = 'Vidéothèque';
+   protected static ?string $navigationLabel = 'Catégories';
+   protected static ?string $label = 'Catégories';
 
    protected static ?int $navigationSort = 2;
 
@@ -47,9 +49,17 @@ class CategoryResource extends Resource
                 ->schema([
                     Section::make([
                         TextInput::make('name')
-                            ->label('nom')
-                            ->required(),
-                        TextInput::make('slug'),
+                        ->required()
+                        ->live(onBlur: true) // Updates the slug as you type or on blur
+                        ->afterStateUpdated(function (callable $set, $state) {
+                            $set('slug', \Illuminate\Support\Str::slug($state));
+                        }),
+                    
+                      TextInput::make('slug')
+                        ->required()
+                        ->unique() // Optional: ensures the slug is unique in the database
+                        ->disabled() // Optional: prevents manual editing of the slug
+                        ->dehydrated(true), // Ensures the slug is included in the form submission
                         Toggle::make('status')
                             ->label('Visibilité')
                             ->helperText('Activer ou désactiver la visibilité des catégories')
@@ -85,7 +95,8 @@ class CategoryResource extends Resource
         return $table
         ->columns([
             ImageColumn::make('image'),
-            TextColumn::make('nome')
+            TextColumn::make('name')
+                ->label('Nom')
                 ->searchable()
                 ->sortable(),
             IconColumn::make('memberships')
