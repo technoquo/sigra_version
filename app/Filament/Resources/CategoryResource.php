@@ -79,7 +79,7 @@ class CategoryResource extends Resource
                             ])
                             ->required()
                             ->reactive(),
-                        TextInput::make('external')
+                        TextInput::make('url')
                             ->label('External URL')
                             ->visible(fn (callable $get) => $get('type') === 'external'),
                        ])
