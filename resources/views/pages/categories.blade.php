@@ -20,11 +20,14 @@
         @forelse ($categoryAges as $category)
 
             <div class="px-5 py-8">
-                @if ($category->category->url)
-                <a href="{{$category->category->url }}" target="_blank">
-                @else
-                <a href="{{ route('subcategories.index', ['age' => $slug, 'category' => $category->category->slug]) }}">
-                @endif
+                @php
+                    $hasExternalUrl = $category->category->url;
+                    $link = $hasExternalUrl
+                        ? $category->category->url
+                        : route('subcategories.index', ['age' => $slug, 'category' => $category->category->slug]);
+                @endphp
+
+                <a href="{{ $link }}" {{ $hasExternalUrl ? 'target=_blank' : '' }}>
                     <img src="{{ asset('storage/' . $category->category->image) }}" alt="Category Image">
                 </a>
             </div>

@@ -81,16 +81,20 @@
                 <li x-data="{ open: false }" class="relative">
                     <div class="flex items-center justify-between">
                         <a href="{{ route('ages') }}" class="block md:p-0 py-2 px-3 rounded-sm md:bg-transparent text-blue-700">Vidéothèque</a>
+                        @auth
                         <button @click="open = !open" class="text-sm text-gray-600 focus:outline-none">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                             </svg>
 
                         </button>
+                        @endauth
                     </div>
+                    @auth
                     <ul x-show="open" @click.away="open = false" class="absolute left-0 mt-2 space-y-2 bg-white border rounded-lg shadow-lg w-48">
                         <li><a href="{{ route('monsigra') }}" class="block px-4 py-2 hover:bg-gray-100 text-blue-700">Sigran Fan 2020</a></li>
                     </ul>
+                    @endauth
                 </li>
 
 

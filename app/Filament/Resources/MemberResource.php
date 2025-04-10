@@ -34,7 +34,7 @@ class MemberResource extends Resource
    protected static ?string $navigationLabel = 'Membres';
    protected static ?string $label = 'Membres';
 
-   protected static ?int $navigationSort = 5;
+   protected static ?int $navigationSort = 6;
 
     public static function form(Form $form): Form
     {
@@ -86,7 +86,7 @@ class MemberResource extends Resource
                     ->toggleable()
                     ->sortable()
                     ->boolean()
-                    ->label('Statut'), 
+                    ->label('Statut'),
             ])
             ->filters([
                 //

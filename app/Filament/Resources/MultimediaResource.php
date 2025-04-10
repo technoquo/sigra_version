@@ -25,7 +25,7 @@ class MultimediaResource extends Resource
       protected static ?string $navigationLabel = 'Multimédia';
       protected static ?string $label = 'Multimédia';
 
-      protected static ?int $navigationSort = 4;
+      protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {
@@ -37,7 +37,7 @@ class MultimediaResource extends Resource
                         ->label('Vidéo')
                         ->relationship('video', 'name')
                         ->required(),
-                    Select::make('categories')                      
+                    Select::make('categories')
                         ->label('Catégories')
                         ->relationship('categories', 'name')
                         ->multiple(),

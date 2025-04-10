@@ -6,7 +6,7 @@
         <!-- Added text-center -->
         <a href="{{ route('categories.index', ['slug' => $age->name]) }}">
             <img class="aspect-auto mx-auto" src="{{ asset('storage/' . $age->image) }}"> <!-- Added mx-auto -->
-        </a>
+        </a> 
     </div>
     @endforeach
 

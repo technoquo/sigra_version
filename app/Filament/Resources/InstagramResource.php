@@ -59,18 +59,26 @@ class InstagramResource extends Resource
     {
         return $table
             ->columns([
+            TextColumn::make('id')
+                ->label('ID')
+                ->sortable()
+                ->searchable(),
             TextColumn::make('title')
                 ->label('Titre')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('code')
                 ->searchable()
-                ->sortable(),         
+                ->sortable(),
             IconColumn::make('status')
                 ->toggleable()
                 ->sortable()
                 ->boolean()
                 ->label('Visibilité'),
+            TextColumn::make('created_at')
+                ->label('Créé le')
+                ->dateTime()
+                ->sortable(),
             ])
             ->filters([
                 //

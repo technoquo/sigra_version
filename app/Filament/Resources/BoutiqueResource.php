@@ -45,7 +45,6 @@ class BoutiqueResource extends Resource
                             ->maxLength(255),
                         Forms\Components\Toggle::make('status')
                             ->label('Statut')
-                            ->required(),
                     ])->columns(2),
                 Group::make()
                     ->schema([
