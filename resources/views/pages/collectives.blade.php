@@ -16,7 +16,7 @@
         @endforeach
     </div>
     <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4 mt-10 mb-10">
-        <a x-data @click.prevent="history.back()"
+        <a href="/"
            class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-400
                  hover:bg-slate-800 focus:ring-4 focus:ring-blue-300 cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
