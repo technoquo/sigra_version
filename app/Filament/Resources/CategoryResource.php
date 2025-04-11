@@ -56,11 +56,15 @@ class CategoryResource extends Resource
                         ->afterStateUpdated(function (callable $set, $state) {
                             $set('slug', \Illuminate\Support\Str::slug($state));
                         }),
-                    
+
                       TextInput::make('slug')
-                        ->required()                       
+                        ->required()
                         ->disabled() // Optional: prevents manual editing of the slug
                         ->dehydrated(true), // Ensures the slug is included in the form submission
+                        Toggle::make('menu')
+                          ->label('Menu')
+                            ->helperText('Afficher ou masquer la catégorie dans le menu')
+                            ->default(false),
                         Toggle::make('status')
                             ->label('Visibilité')
                             ->helperText('Activer ou désactiver la visibilité des catégories')
@@ -83,7 +87,7 @@ class CategoryResource extends Resource
                             ->label('External URL')
                             ->visible(fn (callable $get) => $get('type') === 'external'),
                        ])
-                    
+
                 ]),
             Group::make()
                 ->schema([
@@ -108,9 +112,9 @@ class CategoryResource extends Resource
                 ->label('Nom')
                 ->searchable()
                 ->sortable(),
-            TextColumn::make('type')               
-                ->sortable()   
-                ->searchable()           
+            TextColumn::make('type')
+                ->sortable()
+                ->searchable()
                 ->label('Type'),
             IconColumn::make('status')
                 ->toggleable()

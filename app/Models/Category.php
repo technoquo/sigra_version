@@ -21,7 +21,8 @@ class Category extends Model
         'slug',
         'image',
         'type',
-        'status',        
+        'menu',
+        'status',
         'url',
     ];
 

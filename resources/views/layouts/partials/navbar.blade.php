@@ -78,24 +78,47 @@
             <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
                 <li><a href="/" class="block md:p-0 py-2 px-3  rounded-sm md:bg-transparent ">Accueil</a></li>
 
-                <li x-data="{ open: false }" class="relative">
+                <li class="relative group">
                     <div class="flex items-center justify-between">
-                        <a href="{{ route('ages') }}" class="block md:p-0 py-2 px-3 rounded-sm md:bg-transparent text-blue-700">Vidéothèque</a>
-                        @auth
-                        <button @click="open = !open" class="text-sm text-gray-600 focus:outline-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                            </svg>
-
-                        </button>
-                        @endauth
+                        <a href="{{ route('ages') }}" class="block md:p-0 py-2 px-3 rounded-sm md:bg-transparent text-blue-700 flex items-center">
+                            Vidéothèque
+                            @auth
+                                <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            @endauth
+                        </a>
                     </div>
-                    @auth
-                    <ul x-show="open" @click.away="open = false" class="absolute left-0 mt-2 space-y-2 bg-white border rounded-lg shadow-lg w-48">
-                        <li><a href="{{ route('monsigra') }}" class="block px-4 py-2 hover:bg-gray-100 text-blue-700">Sigran Fan 2020</a></li>
-                    </ul>
-                    @endauth
+
+                    <!-- Dropdown pegado directamente debajo del trigger -->
+                    <div class="absolute top-full left-0 mt-0 w-48 bg-white border rounded-lg shadow-lg z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                        <ul class="space-y-2 p-2">
+
+
+                            @foreach(\App\Models\Category::orderBy('name')->get() as $category)
+                                @if(!$category->menu)
+                                    @continue
+                                @endif
+                                <li>
+                                    @if ($category->type === 'affiliations')
+                                        @auth
+                                            <li>
+                                                <a href="{{ route('monsigra') }}" class="block px-4 py-2 hover:bg-gray-100 text-blue-700">Sigran Fan 2020</a>
+                                            </li>
+                                        @endauth
+
+                                    @else
+                                        <a href="{{ route('categories.collective', ['slug' => $category->slug]) }}" class="block px-4 py-2 hover:bg-gray-100 text-blue-700">
+                                            {{ $category->name }}
+                                        </a>
+                                    @endif
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </li>
+
+
 
 
                 <li><a href="{{ route('boutique.index') }}" class="block md:p-0 py-2 px-3  rounded-sm md:bg-transparent text-blue-700">La boutique</a></li>

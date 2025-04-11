@@ -15,6 +15,7 @@ use App\Http\Controllers\SubCategoryController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/videoteque', [AgeController::class, 'index'])->name('ages');
 Route::get('/videoteque/categories/{slug}', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/videoteque/collective/{slug}', [CategoryController::class, 'collective'])->name('categories.collective');
 Route::get('videoteque/subcategories/{age}/{category}', [SubCategoryController::class, 'index'])->name('subcategories.index');
 Route::get('videoteque/subcategories/{age}/{category}/{subcategory}', [SubCategoryController::class, 'show'])->name('subcategories.show');
 Route::get('videoteque/subcategories/{age}/{category}/{subcategory}/{vimeo}', [SubCategoryController::class, 'vimeo'])->name('vimeo');
