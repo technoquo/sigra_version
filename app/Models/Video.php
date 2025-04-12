@@ -16,6 +16,7 @@ class Video extends Model
      */
     protected $fillable = [
         'name',
+        'slug',
         'vimeo',
         'type',
         'status',
