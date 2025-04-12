@@ -9,25 +9,26 @@ use Illuminate\Http\Request;
 
 class MonSigraController extends Controller
 {
-    
+
   public function index()
     {
-   
-      
+
+
+        if (auth()->user()->role === 'ADMIN') {
+            $videos = Video::where('type','privé')->get();
+        } else {
+
             $members = Member::where('subscriptions_id', '=', 1)
-            ->where('status', '=', 1)
-            ->where('users_id', '=', auth()->user()->id)
-            ->get();
-
-           
-
+                ->where('status', '=', 1)
+                ->where('users_id', '=', auth()->user()->id)
+                ->get();
             // Recolectar todos los videos_id de los miembros
             $videosIds = $members->pluck('videos_id')->flatMap(function ($videos) {
-            return is_string($videos) ? json_decode($videos, true) : $videos;
+                return is_string($videos) ? json_decode($videos, true) : $videos;
             })->unique()->values()->all();
 
             $videos = Video::whereIn('id', $videosIds)->get();
-           
+        }
 
             // Obtener los multimedias filtrados y ordenados
             // $multimedias = Multimedia::query()
@@ -42,16 +43,16 @@ class MonSigraController extends Controller
             // ->select('multimedia.*')
             // ->get();
 
-          
+
 
             return view('pages.monsigra', compact('videos'));
 
-        
+
     }
-    
+
     public function vimeo($vimeo) {
-       
-       
+
+
         $video = Video::where('slug', $vimeo)
                  ->where('status', 1)
                  ->where('type', 'privé')
@@ -60,7 +61,7 @@ class MonSigraController extends Controller
 
         return view('pages.videosigpop', compact('video'));
     }
-                       
 
-    
+
+
 }

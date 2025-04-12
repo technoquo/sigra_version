@@ -13,15 +13,15 @@
                   <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase">Organisation</h2>
                   <ul class="text-gray-500 font-medium">
                       <li class="mb-4">
-                          <a href="#" class="hover:underline">Notre Équipe</a>
+                          <a href="/qui-sommes-nous" class="hover:underline">Notre Équipe</a>
                       </li>
                       <li class="mb-4">
-                          <a href="#" class="hover:underline">Nos Actions</a>
+                          <a href="/nos-actions" class="hover:underline">Nos Actions</a>
                       </li>
                       <li>
-                          <a href="#" class="hover:underline">LSFB ASBL</a>
+                          <a href="https://www.lsfb.be/" target="_blank" class="hover:underline">LSFB ASBL</a>
                       </li>
-                      
+
                   </ul>
               </div>
               <div>
@@ -34,21 +34,7 @@
                           <a href="https://www.instagram.com/sigra.lsfb_asbl/" class="hover:underline">Instagram</a>
                       </li>
                       <li class="mb-4">
-                        <a href="#" class="hover:underline">Contactez-nous</a>
-                    </li>
-                  </ul>
-              </div>
-              <div>
-                  <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase">LÉGAL</h2>
-                  <ul class="text-gray-500 font-medium">
-                    <li class="mb-4">
-                        <a href="#" class="hover:underline">Politique de Confidentialité</a>
-                    </li>
-                    <li class="mb-4">
-                        <a href="#" class="hover:underline">Licence</a>
-                    </li>
-                    <li class="mb-4">
-                        <a href="#" class="hover:underline">Termes et conditions Conditions</a>
+                        <a href="/contact" class="hover:underline">Contactez-nous</a>
                     </li>
                   </ul>
               </div>
@@ -58,7 +44,7 @@
       <div class="sm:flex sm:items-center sm:justify-between">
           <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© {{ date('Y') }} <a href="https://www.lsfb.be/" class="hover:underline">LSFB asbl</a>
           </span>
-     
+
           <div class="flex mt-4 space-x-5 sm:justify-center md:mt-0">
             <a href="https://www.facebook.com/profile.php?id=100063516312585" target="_blank" class="text-gray-400 hover:text-gray-900 dark:hover:text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#597e8d" fill="none" stroke-linecap="round" stroke-linejoin="round">
