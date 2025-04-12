@@ -42,7 +42,7 @@ class CategoryController extends Controller
         $videoIds = $multimedias->pluck('video_id');
 
         // Obtener todos los videos relacionados
-        $videos = DB::table('videos')->whereIn('id', $videoIds)->get();
+        $videos = DB::table('videos')->whereIn('id', $videoIds)->orderBy('videos.name','asc')->get();
 
         // Mostrar todos los videos
         return view('pages.collectives', compact('videos'));

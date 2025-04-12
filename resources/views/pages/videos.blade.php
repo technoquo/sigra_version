@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="md:flex md:flex-row justify-center flex-wrap gap-4 mt-4">
-        @foreach($multimedias as $multimedia)
+        @foreach($multimedias->sortBy(fn($m) => strtolower($m->video->name)) as $multimedia)
         <div class="max-w-sm  border-2  border-solid rounded-lg shadow bg-gray-800 border-gray-700 m-4">
             <a href="{{ route('vimeo', ['age' => $age, 'category' => $subcategory, 'subcategory' => $subcategory,  $multimedia->video->slug ]) }}">
                 <img class="h-auto w-80 rounded-lg" src="https://vumbnail.com/{{ $multimedia->video->vimeo  }}.jpg">
